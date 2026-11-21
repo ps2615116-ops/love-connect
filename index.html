@@ -99,19 +99,25 @@ nav button{font-size:13px}
 </main>
 
 function sendMessage(){
- let input=document.getElementById("chatInput");
- let msg=input.value.trim();
- if(msg===""){
-  alert("पहले मैसेज लिखें");
-  return;
- }
- let p=document.createElement("p");
- p.innerText="🙂 आप: "+msg;
- document.getElementById("messages").appendChild(p);
- input.value="";
- document.getElementById("messages").scrollTop=
- document.getElementById("messages").scrollHeight;
+  let input = document.getElementById("chatInput");
+  let msg = input.value.trim();
+
+  if(msg === ""){
+    alert("पहले मैसेज लिखें");
+    return;
+  }
+
+  let p = document.createElement("p");
+  p.innerText = "🙂 आप: " + msg;
+
+  document.getElementById("messages").appendChild(p);
+
+  input.value = "";
+
+  let box = document.getElementById("messages");
+  box.scrollTop = box.scrollHeight;
 }
+  
   
 <script>
 let balance=0;
