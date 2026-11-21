@@ -1,1 +1,114 @@
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Love Connect ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff4f8;font-family:Arial;color:#382033}
+header{background:linear-gradient(130deg,#fa3979,#9c35bd);color:white;padding:25px 18px;border-radius:0 0 25px 25px}
+h1{margin:0;font-size:27px}
+header p{margin-bottom:0}
+main{max-width:500px;margin:auto;padding:15px}
+nav{display:flex;gap:7px;overflow:auto;margin:12px 0}
+nav button{border:0;padding:11px;border-radius:20px;background:#f5dce8;color:#8e2855}
+nav button.active{background:#e83e72;color:white}
+.panel{background:white;border-radius:20px;padding:18px;margin-bottom:15px;box-shadow:0 5px 18px #0000000c}
+.photo{height:210px;background:linear-gradient(135deg,#ffd0e1,#d9b8ed);border-radius:16px;display:grid;place-items:center;font-size:85px}
+button{cursor:pointer}
+.action{background:#e83e72;color:white;border:0;padding:12px 20px;border-radius:12px;font-weight:bold}
+input,select{width:100%;padding:12px;border:1px solid #e8cbd9;border-radius:10px;margin:7px 0}
+.small{font-size:12px;color:#806b7b}
+.page{display:none}.page.show{display:block}
+</style>
+</head>
+<body>
+<header>
+<h1>💗 Love Connect</h1>
+<p>दोस्ती की नई शुरुआत</p>
+</header>
+<main>
+<nav>
+<button class="active" onclick="openPage('home',this)">Home</button>
+<button onclick="openPage('profile',this)">Profile</button>
+<button onclick="openPage('wallet',this)">Wallet</button>
+<button onclick="openPage('safety',this)">Safety</button>
+</nav>
+
+<section id="home" class="page show">
+<div class="panel">
+<div class="photo">🌸</div>
+<h2>नए दोस्त खोजें</h2>
+<p>यहाँ अपनी पसंद के नए दोस्त खोजें।</p>
+<p class="small">उदाहरण प्रोफाइल – असली यूजर नहीं</p>
+<button class="action" onclick="alert('अभी यह डेमो है। असली Match सिस्टम बाद में जुड़ेगा।')">❤️ Like</button>
+</div>
+</section>
+
+<section id="profile" class="page">
+<div class="panel">
+<h2>अपनी प्रोफाइल बनाएँ</h2>
+<p class="small">यह सेवा केवल 18 वर्ष या उससे अधिक उम्र के लिए है।</p>
+<input id="name" placeholder="अपना नाम">
+<input id="age" type="number" placeholder="उम्र">
+<select id="gender">
+<option value="">अपना जेंडर चुनें</option>
+<option>पुरुष</option>
+<option>महिला</option>
+<option>अन्य</option>
+</select>
+<input id="city" placeholder="शहर">
+<button class="action" onclick="saveProfile()">प्रोफाइल सेव करें</button>
+<p id="result"></p>
+</div>
+</section>
+
+<section id="wallet" class="page">
+<div class="panel">
+<h2>🪙 My Wallet</h2>
+<h1>₹<span id="balance">0</span></h1>
+<p class="small">डेमो बैलेंस – असली पैसे नहीं</p>
+<button class="action" onclick="addDemo(5)">₹5 Demo</button>
+<button class="action" onclick="addDemo(10)">₹10 Demo</button>
+</div>
+</section>
+
+<section id="safety" class="page">
+<div class="panel">
+<h2>🛡️ सुरक्षा</h2>
+<p>• केवल 18+ यूजर्स।</p>
+<p>• किसी को OTP या बैंक जानकारी न दें।</p>
+<p>• धोखाधड़ी करने वाले यूजर से सावधान रहें।</p>
+<p>• असली लॉन्च से पहले Block और Report सिस्टम जोड़ा जाएगा।</p>
+</div>
+</section>
+<p class="small">Love Connect © 2026 | शुरुआती डेमो</p>
+</main>
+<script>
+function openPage(id,btn){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+document.getElementById(id).classList.add('show');
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+let balance=0;
+function addDemo(n){
+balance+=n;
+document.getElementById('balance').textContent=balance;
+alert('डेमो बैलेंस में ₹'+n+' जोड़े गए। असली पेमेंट नहीं हुआ।');
+}
+function saveProfile(){
+let n=document.getElementById('name').value;
+let a=Number(document.getElementById('age').value);
+let g=document.getElementById('gender').value;
+let c=document.getElementById('city').value;
+if(!n||!a||!g||!c){alert('सभी जानकारी भरें');return;}
+if(a<18){alert('यह ऐप केवल 18+ के लिए है।');return;}
+document.getElementById('result').textContent='नमस्ते '+n+'! आपकी डेमो प्रोफाइल तैयार है।';
+}
+</script>
+</body>
+</html>
+
