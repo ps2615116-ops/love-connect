@@ -36,6 +36,8 @@ nav button{font-size:13px}
   <button onclick="sendMessage()">भेजें</button>
 </div>
 
+<button onclick="show('chat')">Chat 💬</button>
+
 <main>
 <section id="login" class="card">
 <h2>मोबाइल Login</h2>
@@ -96,6 +98,21 @@ nav button{font-size:13px}
 </section>
 </main>
 
+function sendMessage(){
+ let input=document.getElementById("chatInput");
+ let msg=input.value.trim();
+ if(msg===""){
+  alert("पहले मैसेज लिखें");
+  return;
+ }
+ let p=document.createElement("p");
+ p.innerText="🙂 आप: "+msg;
+ document.getElementById("messages").appendChild(p);
+ input.value="";
+ document.getElementById("messages").scrollTop=
+ document.getElementById("messages").scrollHeight;
+}
+  
 <script>
 let balance=0;
 let demoOTP="";
@@ -122,7 +139,7 @@ function verifyOTP(){
 }
 
 function show(id){
- ["home","profile","wallet","safety"].forEach(x=>{
+ ["home","profile","wallet","safety","chat"].forEach(x=>{
   document.getElementById(x).classList.add("hidden");
  });
  document.getElementById(id).classList.remove("hidden");
