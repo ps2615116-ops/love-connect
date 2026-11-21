@@ -8,35 +8,25 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#fff0f6;color:#292033;font-family:Arial}
-header{background:linear-gradient(120deg,#ff3680,#873cff);color:white;text-align:center;padding:25px}
-h1{margin:0}
-main{max-width:480px;margin:auto;padding:16px}
-.card{background:white;padding:20px;border-radius:18px;margin:15px 0;box-shadow:0 4px 15px #0001}
+header{background:linear-gradient(120deg,#ff3680,#873cff);color:white;text-align:center;padding:24px}
+main{max-width:480px;margin:auto;padding:14px}
+.card{background:white;padding:18px;border-radius:18px;margin:14px 0;box-shadow:0 4px 15px #0001}
 input,select{width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:10px;font-size:16px}
-button{background:#e93683;color:white;border:0;border-radius:10px;padding:13px 18px;margin:5px;cursor:pointer}
+button{background:#e93683;color:white;border:0;border-radius:10px;padding:12px 16px;margin:4px;cursor:pointer}
 nav{display:flex;flex-wrap:wrap;justify-content:center;background:white;padding:8px}
 nav button{font-size:13px}
-.hidden{display:none}
-.note{color:#777;font-size:13px}
+.hidden{display:none!important}
+.note{font-size:12px;color:#777}
+#messages{height:260px;overflow-y:auto;background:#fff0f6;padding:12px;border-radius:12px}
+.msg{background:white;padding:10px;border-radius:12px;margin:8px 0;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
+
 <header>
 <h1>❤️ Love Connect</h1>
 <p>Dosti • Pyaar • Connect</p>
 </header>
-
-<div id="chat" class="card hidden">
-  <h2>💬 Love Connect Chat</h2>
-  <p>Priya से बातचीत (Demo)</p>
-  <div id="messages" style="height:250px;overflow-y:auto;background:#fff0f6;padding:10px;border-radius:12px">
-    <p>❤️ Priya: Hi! कैसे हो?</p>
-  </div>
-  <input id="chatInput" placeholder="अपना मैसेज लिखें">
-  <button onclick="sendMessage()">भेजें</button>
-</div>
-
-<button onclick="show('chat')">Chat 💬</button>
 
 <main>
 <section id="login" class="card">
@@ -44,19 +34,20 @@ nav button{font-size:13px}
 <p>Love Connect में आपका स्वागत है!</p>
 <input id="mobile" type="tel" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर">
 <button onclick="sendOTP()">OTP भेजें</button>
-<p class="note">यह अभी डेमो है। असली SMS OTP सेवा अभी जुड़ी नहीं है।</p>
+<p class="note">यह डेमो Login है। असली SMS OTP अभी जुड़ा नहीं है।</p>
 <div id="otpArea" class="hidden">
-<input id="otp" type="number" placeholder="डेमो OTP डालें">
+<input id="otp" type="number" placeholder="Demo OTP डालें">
 <button onclick="verifyOTP()">Login करें</button>
 </div>
 </section>
 
 <section id="app" class="hidden">
 <nav>
-<button onclick="show('home')">Home</button>
-<button onclick="show('profile')">Profile</button>
-<button onclick="show('wallet')">Wallet</button>
-<button onclick="show('safety')">Safety</button>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('profile')">Profile</button>
+<button onclick="showPage('wallet')">Wallet</button>
+<button onclick="showPage('safety')">Safety</button>
+<button onclick="showPage('chat')">Chat 💬</button>
 </nav>
 
 <div id="home" class="card">
@@ -64,7 +55,7 @@ nav button{font-size:13px}
 <p>नए दोस्तों से मिलें और जुड़ें।</p>
 <h3>Demo Profile</h3>
 <p>नाम: Priya | उम्र: 22 | शहर: Jaipur</p>
-<button onclick="alert('यह अभी डेमो Like है')">❤️ Like</button>
+<button onclick="alert('यह Demo Like है')">❤️ Like</button>
 </div>
 
 <div id="profile" class="card hidden">
@@ -73,7 +64,9 @@ nav button{font-size:13px}
 <input id="age" type="number" placeholder="उम्र">
 <select id="gender">
 <option value="">Gender चुनें</option>
-<option>Male</option><option>Female</option><option>Other</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
 </select>
 <input id="city" placeholder="शहर">
 <button onclick="saveProfile()">Save Profile</button>
@@ -85,84 +78,100 @@ nav button{font-size:13px}
 <h3>Demo Balance: ₹<span id="balance">0</span></h3>
 <button onclick="addMoney(5)">₹5 Demo</button>
 <button onclick="addMoney(10)">₹10 Demo</button>
-<p class="note">यह केवल डेमो बैलेंस है। असली पैसे जमा या निकाले नहीं जा सकते।</p>
+<p class="note">यह असली पैसा नहीं है। कोई वास्तविक भुगतान नहीं होगा।</p>
 </div>
 
 <div id="safety" class="card hidden">
 <h2>🛡️ Safety</h2>
-<p>केवल 18+ लोगों के लिए।</p>
-<p>किसी को अपना OTP, बैंक जानकारी या पासवर्ड न दें।</p>
+<p>केवल 18 वर्ष या उससे अधिक उम्र के लोगों के लिए।</p>
+<p>अपना OTP, बैंक जानकारी या पासवर्ड किसी को न दें।</p>
 <p>गलत व्यवहार करने वाले व्यक्ति को ब्लॉक और रिपोर्ट करें।</p>
 </div>
+
+<div id="chat" class="card hidden">
+<h2>💬 Love Connect Chat</h2>
+<p>Demo Chat</p>
+<div id="messages">
+<div class="msg">❤️ Priya: Hi! कैसे हो?</div>
+</div>
+<input id="chatInput" placeholder="अपना मैसेज लिखें">
+<button onclick="sendMessage()">मैसेज भेजें ➤</button>
+<p class="note">यह अभी आपके फोन पर चलने वाला Demo Chat है।</p>
+</div>
+
 <button onclick="logout()">Logout</button>
 </section>
 </main>
 
-function sendMessage(){
-  let input = document.getElementById("chatInput");
-  let msg = input.value.trim();
-
-  if(msg === ""){
-    alert("पहले मैसेज लिखें");
-    return;
-  }
-
-  let p = document.createElement("p");
-  p.innerText = "🙂 आप: " + msg;
-
-  document.getElementById("messages").appendChild(p);
-
-  input.value = "";
-
-  let box = document.getElementById("messages");
-  box.scrollTop = box.scrollHeight;
-}
-  
-  
 <script>
 let balance=0;
 let demoOTP="";
 
 function sendOTP(){
  let m=document.getElementById("mobile").value.trim();
- if(!/^[6-9]\d{9}$/.test(m)){
+ if(!/^[6-9][0-9]{9}$/.test(m)){
   alert("सही 10 अंकों का मोबाइल नंबर डालें");
   return;
  }
  demoOTP=String(Math.floor(1000+Math.random()*9000));
  document.getElementById("otpArea").classList.remove("hidden");
- alert("डेमो OTP: "+demoOTP+" (SMS नहीं भेजा गया)");
+ alert("आपका Demo OTP: "+demoOTP);
 }
 
 function verifyOTP(){
- if(document.getElementById("otp").value===demoOTP && demoOTP!==""){
+ let entered=document.getElementById("otp").value;
+ if(entered===demoOTP && demoOTP!==""){
   document.getElementById("login").classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
-  show("home");
+  showPage("home");
  }else{
   alert("OTP गलत है");
  }
 }
 
-function show(id){
- ["home","profile","wallet","safety","chat"].forEach(x=>{
-  document.getElementById(x).classList.add("hidden");
+function showPage(id){
+ let pages=["home","profile","wallet","safety","chat"];
+ pages.forEach(function(page){
+  document.getElementById(page).classList.add("hidden");
  });
  document.getElementById(id).classList.remove("hidden");
 }
 
-function saveProfile(){
- let age=Number(document.getElementById("age").value);
- if(!document.getElementById("name").value.trim() || age<18 || age>120){
-  alert("नाम डालें और सही उम्र (18+) लिखें");
+function sendMessage(){
+ let input=document.getElementById("chatInput");
+ let msg=input.value.trim();
+
+ if(msg===""){
+  alert("पहले मैसेज लिखें");
   return;
  }
- document.getElementById("profileMsg").innerText="Profile इस डेमो में तैयार है!";
+
+ let p=document.createElement("div");
+ p.className="msg";
+ p.textContent="🙂 आप: "+msg;
+
+ document.getElementById("messages").appendChild(p);
+ input.value="";
+
+ let box=document.getElementById("messages");
+ box.scrollTop=box.scrollHeight;
+}
+
+function saveProfile(){
+ let age=Number(document.getElementById("age").value);
+ let name=document.getElementById("name").value.trim();
+
+ if(!name || age<18 || age>120){
+  alert("नाम डालें और उम्र 18 से अधिक रखें");
+  return;
+ }
+
+ document.getElementById("profileMsg").textContent="Profile Demo में तैयार है!";
 }
 
 function addMoney(n){
  balance+=n;
- document.getElementById("balance").innerText=balance;
+ document.getElementById("balance").textContent=balance;
 }
 
 function logout(){
@@ -172,5 +181,6 @@ function logout(){
  document.getElementById("otp").value="";
 }
 </script>
+
 </body>
 </html>
